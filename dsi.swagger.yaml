@@ -1,0 +1,75 @@
+---
+swagger: "2.0"
+info:
+  version: "1.0"
+  title: "Mobile Intercept ExtractData API by DSi"
+host: "dsi.cloud.tyk.io"
+basePath: "/extractdata-api"
+schemes:
+- "https"
+consumes:
+- "multipart/form-data"
+produces:
+- "application/json"
+paths:
+  /:
+    post:
+      tags:
+      - "ExtractData API"
+      summary: "Extract Data"
+      description: "Extracts information from ID"
+      operationId: "ExtractData"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Enter your API key."
+        required: true
+        type: "string"
+      - name: "CropImage"
+        in: "formData"
+        description: "Crop Image?"
+        required: true
+        type: "boolean"
+      - name: "FrontImage"
+        in: "formData"
+        description: "Front Image"
+        required: true
+        type: "file"
+      - name: "BackImage"
+        in: "formData"
+        description: "Back Image"
+        required: true
+        type: "file"
+      responses:
+        200:
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/inline_response_200"
+      security: []
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+definitions:
+  inline_response_200:
+    properties:
+      ExtractSource:
+        type: "integer"
+        format: "int32"
+        description: "Extract Source: 1 for OCR, 2 for Barcode"
+      TransactionId:
+        type: "string"
+        description: "TransactionId transaction ID"
+      Errors:
+        type: "array"
+        format: "string"
+        description: "Extraction Errors"
+      Success:
+        type: "boolean"
+        description: "Extraction operation was Success"

@@ -1,0 +1,100 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Mobile Intercept ExtractData API by DSI"
+  },
+  "host": "devportal.dragnetsolutions.com:8080",
+  "schemes": "https"
+  "basePath": "/extractdata-api/",
+  "consumes": [
+    "multipart/form-data"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/": {
+      "post": {
+        "description": "Extracts information from ID",
+        "summary": "ExtractData",
+        "tags": [
+          "ExtractData API"
+        ],
+        "operationId": "ExtractData",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Enter your API key."
+          },
+          {
+            "name": "CropImage",
+            "in": "formData",
+            "required": true,
+            "type": "boolean",
+            "description": "Crop Image?"
+          },
+          {
+            "name": "FrontImage",
+            "in": "formData",
+            "required": true,
+            "type": "file",
+            "description": "Front Image"
+          },
+          {
+            "name": "BackImage",
+            "in": "formData",
+            "required": true,
+            "type": "file",
+            "description": "Back Image"
+          }      
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ExtractSource": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "This is the description for ExtractSource"
+                },
+                "TransactionId": {
+                  "type": "string",
+                  "description": "This is the description for TransactionId"
+                },
+                "Errors": {
+                  "type": "array",
+                  "format": "string",
+                  "description": "This is the description for Errors"
+                },
+                "Success": {
+                  "type": "boolean",
+                  "description": "This is the description for Success"
+                }
+              }
+            }
+          }
+        },
+        "security": [],
+        "x-unitTests": [],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    }
+  }
+}
